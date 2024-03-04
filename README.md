@@ -18,7 +18,7 @@ Projeyi hızlı bir şekilde incelemek için aşağıdakileri uygulayın.
 # Çalışma Mekanizması
 
 
- ## Firebase İşlemleri
+ ### Firebase İşlemleri
 
 - Firebase projesi oluşturma ve app ekleme
 
@@ -29,8 +29,8 @@ Projeyi hızlı bir şekilde incelemek için aşağıdakileri uygulayın.
 - Bize verdiği firebase konfigürasyonunu oluşturduğumuz Angular projesine login/logout işlemlerinde kullanmak için eklememiz gerekiyor. 
 - Standart haline gelen ``` src/environments/environment.ts ``` dosya yoluna bu konfigürasyonu ekleyebilirsiniz.
 
-    ```javascript
-    export const environment = {
+    ```typescript
+    export const firebaseConfig = {
     apiKey: "",
     authDomain: "",
     projectId: "",
@@ -47,18 +47,158 @@ Projeyi hızlı bir şekilde incelemek için aşağıdakileri uygulayın.
 
 - app.module.ts dosyasına Firebase modüllerini ekliyoruz çünkü bu dosya uygulamanın ana modül dosyasıdır ve uygulamanın ana komponentini (app.component)/komponentlerini ve servislerini içerir. Firebase modüllerini bu dosyaya eklemek, uygulamanın tüm komponentlerinde bu modüllere erişim sağlar.
 
-    ```javascript
+    ```typescript
     import { AngularFireModule } from '@angular/fire/compat';
     import { AngularFireAuthModule } from '@angular/fire/compat/auth';
     import { firebaseConfig } from '../environments/environment';
     ```
-    ```javascript
+    ```typescript
     imports: [
         ///
         AngularFireModule.initializeApp(firebaseConfig.firebase),
         AngularFireAuthModule,
     ],
     ```
+
+### Auth Servisi oluşturma
+
+Aşağıdaki komut ile bir servis dosyası oluşturuyoruz.
+
+```bash
+ng generate service auth
+```
+
+Servisimize login ve logout işlemlerini tanımlıyoruz.
+
+```typescript
+
+  //kullanıcı henüz giriş yapmadıysa false
+  isLoggedIn: boolean = false;
+
+  constructor(private afAuth: AngularFireAuth) {
+    //kullanıcı giriş yaptıysa true, yapamadıysa false
+    this.afAuth.onAuthStateChanged((user) => {
+      if (user) {
+        this.isLoggedIn = true;
+      } else {
+        this.isLoggedIn = false;
+      }
+    });
+  }
+
+  login(email: string, password: string) {
+    this.afAuth
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        //console.log("giriş başarılı");
+        ///
+      })
+      .catch((error) => {
+        //console.log("giriş başarısız");
+        ///
+      });
+  }
+
+  logout() {
+    this.afAuth
+      .signOut()
+      .then(() => {
+        //console.log("çıkış başarılı");
+        ///
+      })
+      .catch((error) => {
+        //console.log("çıkış başarılı");
+        ///
+      });
+  }
+  ```
+
+### Auth Servisini Komponentlerde Kullanma
+
+#### Giriş Yap Komponenti
+
+Login ve Home isminde iki komponent oluştururuyoruz. Komponent class'ı içerisine kodu yapıştırıyoruz.
+
+```typescript
+  email: string;
+  password: string;
+
+  constructor(private authService: AuthService) {
+    this.email = '';
+    this.password = '';
+    this.errorMessage = '';
+  }
+
+  login(email: string, password: string) {
+    this.authService.login(email, password);
+  }
+```  
+HTML kısmında ise aşağıdaki kodu yapıştırıyoruz.
+
+```html
+<form (ngSubmit)="login(email, password)">
+  <div>
+    <div>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        [(ngModel)]="email"
+      />
+    </div>
+    <div>
+      <input
+        type="password"
+        name="password"
+        [(ngModel)]="password"
+        id="password"
+      />
+    </div>
+  </div>
+  <button type="submit">Giriş Yap</button>
+</form>
+```
+
+ngModel ile ilk olarak inputlardaki bilgiyi alıp ngSubmit ile submit butonuna tıklandığında login(email,password) parametreli fonksiyonu çağırıyoruz.
+
+#### Home Komponenti
+
+Aşağıdaki kodu komponentimize ekleyip bir buton vasıtasıyla çağırıyoruz.
+
+```typescript
+constructor(private authService: AuthService) {}
+  logout() {
+    this.authService.logout();
+  }
+```
+
+#### App Komponenti
+
+App komponentimize aşağıdaki kodu ekleyerek bir boolean değeriyle kullanıcının giriş çıkış bilgisini öğreniyoruz.
+
+```typescript
+constructor(private authService: AuthService) {}
+  ngOnInit() {}
+  get isLoggedIn() {
+    return this.authService.isLoggedIn;
+  }
+````
+HTML kısmını ise aşağıdaki gibi yapıyoruz. *NGIf yardımı ile HTML içerisinde if/else fonskiyonelitesini kullanma imkanına sahibiz. Kullanıcının giriş çıkış işlemlerinden aldığımız login/false değeri bilgisi ile komponentleri ekrana sunuyoruz.
+
+```HTML
+<div *ngIf="isLoggedIn">
+  <app-home></app-home>
+</div>
+<div *ngIf="!isLoggedIn">
+  <app-login></app-login>
+</div>
+```
+
+
+
+
+
+
 
 
 
