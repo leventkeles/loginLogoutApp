@@ -8,6 +8,8 @@ export class HomeComponent {
   constructor(private authService: AuthService) {}
   logout() {
     this.authService.logout();
+    //mouse hover glowing çıkış yaptıktan sonra çalışmıyor bu nedenle reload ediyorum
+    location.reload();
   }
   
 }
