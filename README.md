@@ -14,6 +14,11 @@ Projeyi hızlı bir şekilde incelemek için aşağıdakileri uygulayın.
   npm install
   ng serve
 ```
+
+```bash 
+  email: levent@mail.com
+  parola: levent
+```
     
 # Çalışma Mekanizması
 
