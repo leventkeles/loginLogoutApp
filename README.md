@@ -18,13 +18,13 @@ Projeyi hızlı bir şekilde incelemek için aşağıdakileri uygulayın.
 # Çalışma Mekanizması
 
 
- ### Firebase İşlemleri
+ ## Firebase İşlemleri
 
 - Firebase projesi oluşturma ve app ekleme
 
     İlk olarak bir Firebase projesi oluşturduktan sonra projemize girerek "add app" kısmında "web" platformunu seçiyoruz. ```Authentication>Sign-in Method>Add new provider>Email/Password``` yolunu izleyerek Email ve Parola girişini aktif hale getiriyoruz.
 
-### Firebase Konfigürasyonu
+## Firebase Konfigürasyonu
 
 - Bize verdiği firebase konfigürasyonunu oluşturduğumuz Angular projesine login/logout işlemlerinde kullanmak için eklememiz gerekiyor. 
 - Standart haline gelen ``` src/environments/environment.ts ``` dosya yoluna bu konfigürasyonu ekleyebilirsiniz.
@@ -60,7 +60,7 @@ Projeyi hızlı bir şekilde incelemek için aşağıdakileri uygulayın.
     ],
     ```
 
-### Auth Servisi oluşturma
+## Auth Servisi oluşturma
 
 Aşağıdaki komut ile bir servis dosyası oluşturuyoruz.
 
@@ -113,9 +113,9 @@ Servisimize login ve logout işlemlerini tanımlıyoruz.
   }
   ```
 
-### Auth Servisini Komponentlerde Kullanma
+## Auth Servisini Komponentlerde Kullanma
 
-#### Giriş Yap Komponenti
+### Giriş Yap Komponenti
 
 Login ve Home isminde iki komponent oluştururuyoruz. Komponent class'ı içerisine kodu yapıştırıyoruz.
 
@@ -161,7 +161,7 @@ HTML kısmında ise aşağıdaki kodu yapıştırıyoruz.
 
 ngModel ile ilk olarak inputlardaki bilgiyi alıp ngSubmit ile submit butonuna tıklandığında login(email,password) parametreli fonksiyonu çağırıyoruz.
 
-#### Home Komponenti
+### Home Komponenti
 
 Aşağıdaki kodu komponentimize ekleyip bir buton vasıtasıyla çağırıyoruz.
 
@@ -172,7 +172,7 @@ constructor(private authService: AuthService) {}
   }
 ```
 
-#### App Komponenti
+### App Komponenti
 
 App komponentimize aşağıdaki kodu ekleyerek bir boolean değeriyle kullanıcının giriş çıkış bilgisini öğreniyoruz.
 
