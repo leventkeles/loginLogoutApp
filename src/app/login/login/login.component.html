@@ -1,0 +1,86 @@
+<div class="bg-zinc-950 text-zinc-50 antialiased h-screen">
+  <div
+    class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
+  >
+    <!-- LOGO -->
+    <div class="logo pb-12">
+      <img
+        class="w-auto h-12 fill-white"
+        src="https://i0.wp.com/mapperx.com/wp-content/uploads/2022/10/mapperx-logo@3x.png?fit=1501%2C368&ssl=1"
+        alt="logo"
+      />
+    </div>
+    <!-- GLOWING BAŞLANGIÇ -->
+    <div class="relative glow-capture">
+      <div
+        class="bg-zinc-900/50 border-4 border-white/5 rounded-2xl p-20 shadow-lg shadow-black/80 flex md:flex-row flex-col flex-wrap md:items-start items-center md:justify-between justify-center gap-6 glow glow:ring-1 glow:border-glow glow:ring-glow glow:bg-glow/[.15]"
+      >
+        <!-- Z-INDEX ILE GLOWING EFEKTİNİ INPUTLARDAN KORU -->
+        <form class="z-[1]" (ngSubmit)="login(email, password)">
+          <!-- INPUTLAR -->
+          <div class="z-[99]">
+            <div class="pb-2 flex-1 md:order-1 order-2">
+              <label
+                for="email"
+                class="block mb-2 text-sm font-medium text-white"
+                >Email Adresi</label
+              >
+              <input
+                type="email"
+                name="email"
+                id="email"
+                [(ngModel)]="email"
+                class="form-control"
+                required
+                class="sm:text-sm rounded-lg focus:outline-none block w-full p-3 bg-gray-700 border-gray-600 placeholder-gray-400 text-white hover:bg-blue-500 hover:placeholder-blue-200"
+                placeholder="ornek@mail.com"
+              />
+            </div>
+            <div>
+              <label
+                for="password"
+                class="block mb-2 text-sm font-medium text-white"
+                >Parola</label
+              >
+              <input
+                type="password"
+                name="password"
+                [(ngModel)]="password"
+                id="password"
+                placeholder="••••••••"
+                class="sm:text-sm rounded-lg focus:outline-none block w-full p-3 bg-gray-700 border-gray-600 placeholder-gray-400 text-white hover:bg-blue-500 hover:placeholder-blue-200"
+                required
+              />
+            </div>
+          </div>
+          <button
+            type="submit"
+            class="w-full text-white border-4 border-white/5 md:order-2 order-1 glow glow:border-glow/[.5] glow:ring-glow focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-3 mt-5 text-center hover:bg-blue-500 shadow-none"
+          >
+            Giriş Yap
+          </button>
+        </form>
+      </div>
+      <div class="glow-overlay" style="--glow-color: #0ea5e9"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .glow-overlay {
+    --glow-size: 25rem;
+
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    user-select: none;
+    opacity: var(--glow-opacity, 0);
+    mask: radial-gradient(
+      var(--glow-size) var(--glow-size) at var(--glow-x) var(--glow-y),
+      var(--glow-color) 1%,
+      transparent 50%
+    );
+    transition: 400ms mask ease;
+    will-change: mask;
+  }
+</style>
