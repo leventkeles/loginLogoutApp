@@ -3,7 +3,7 @@
 
 Bu proje Angular 17 (version 17.2.2) ile Giriş ve Çıkış işlemini basit bir düzeyde sunmakta ve UI kısmında mouse tracking/mouse hover glowing efektini sunmaktadır.
 
-
+![](https://raw.githubusercontent.com/leventkeles/mypage/main/project-gif.gif)
 
 
 ## Hızlı Başlangıç / Ön İzleme
