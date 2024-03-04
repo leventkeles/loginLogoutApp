@@ -1,27 +1,44 @@
+
 # LoginLogoutApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.2.
+Bu proje Angular 17 (version 17.2.2) ile Giriş ve Çıkış işlemini basit bir düzeyde sunmakta ve UI kısmında mouse tracking/mouse hover glowing efektini sunmaktadır.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Hızlı Başlangıç / Ön İzleme
 
-## Build
+Projeyi hızlı bir şekilde incelemek için aşağıdakileri uygulayın.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash 
+  npm install
+  ng serve
+```
+    
+# Çalışma Mekanizması
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+ ## Yon Haritası
 
-## Running end-to-end tests
+- Firebase projesi oluşturma ve app ekleme
+İlk olarak bir Firebase projesi oluşturduktan sonra projemize girerek "add app" kısmında "web" platformunu seçiyoruz. 
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Authentication>Sign-in Method>Add new provider>Email/Password yolunu izleyerek Email ve Parola girişini aktif hale getiriyoruz.
 
-## Further help
+- Bize verdiği firebase konfigürasyonunu oluşturduğumuz Angular projesine login/logout işlemlerinde kullanmak için eklememiz gerekiyor. 
+- Standart haline gelen ``` src/environments/environment.ts ``` dosya yoluna bu konfigürasyonu ekleyebilirsiniz.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```javascript
+export const environment = {
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: ""
+};
+```
+
+
+
+  
